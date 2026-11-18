@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  user
+  admin
+}
+
+enum Pengirim {
+  user
+  chatbot
+}
+
+model User {
+  id_user     Int      @id @default(autoincrement())
+  nama        String
+  email       String   @unique
+  password    String
+  role        Role     @default(user)
+  created_at  DateTime @default(now())
+
+  comments      Comment[]
+  ratings       Rating[]
+  chat_messages ChatMessage[]
+
+  @@map("users")
+}
+
+model Movie {
+  id_movie    Int      @id @default(autoincrement())
+  judul       String
+  sinopsis    String
+  genre       String
+  tahun       Int
+  durasi      Int
+  poster      String
+  video_url   String?
+  created_at  DateTime @default(now())
+
+  comments Comment[]
+  ratings  Rating[]
+
+  @@map("movies")
+}
+
+model Comment {
+  id_comment    Int      @id @default(autoincrement())
+  id_user       Int
+  id_movie      Int
+  isi_komentar  String
+  created_at    DateTime @default(now())
+
+  user  User  @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
+  movie Movie @relation(fields: [id_movie], references: [id_movie], onDelete: Cascade)
+
+  @@map("comments")
+}
+
+model Rating {
+  id_rating   Int      @id @default(autoincrement())
+  id_user     Int
+  id_movie    Int
+  nilai       Int
+  created_at  DateTime @default(now())
+
+  user  User  @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
+  movie Movie @relation(fields: [id_movie], references: [id_movie], onDelete: Cascade)
+
+  @@unique([id_user, id_movie])
+  @@map("ratings")
+}
+
+model ChatMessage {
+  id_message  Int      @id @default(autoincrement())
+  id_user     Int
+  pengirim    Pengirim
+  pesan       String
+  created_at  DateTime @default(now())
+
+  user User @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
+
+  @@map("chat_messages")
+}
