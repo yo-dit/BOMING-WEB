@@ -58,7 +58,7 @@ async function IsiBeranda() {
   return (
     <main className="px-12 pb-10 pt-4">
       {unggulan && (
-        <div className="relative flex h-[480px] items-end overflow-hidden rounded-lg bg-linear-to-br from-[#5c4a38] to-[#0c0c0c]">
+        <div className="relative flex h-[520px] items-end overflow-hidden rounded-lg bg-linear-to-br from-[#5c4a38] to-[#0c0c0c]">
           <div className="absolute inset-0 bg-linear-to-t from-[#0c0c0c] via-transparent to-transparent" />
           <div className="relative p-10">
             <h1 className="font-judul text-[88px] uppercase leading-none text-merah">
@@ -88,7 +88,7 @@ async function IsiBeranda() {
       <nav className="mt-6 flex flex-wrap gap-2">
         <Link
           href="/film"
-          className="rounded-full bg-merah px-4 py-2 text-sm font-bold text-white"
+          className="rounded-full bg-merah px-4 py-1.5 text-sm font-bold text-white"
         >
           Semua
         </Link>
@@ -96,7 +96,7 @@ async function IsiBeranda() {
           <Link
             key={genre}
             href={`/film?genre=${encodeURIComponent(genre)}`}
-            className="rounded-full bg-[#222222] px-4 py-2 text-sm text-white/80"
+            className="rounded-full bg-[#222222] px-4 py-1.5 text-sm text-white/80"
           >
             {genre}
           </Link>

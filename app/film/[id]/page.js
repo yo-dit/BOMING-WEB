@@ -101,9 +101,9 @@ async function IsiDetail({ params }) {
         </div>
       </div>
 
-      <div className="grid gap-10 px-12 pb-10 pt-8 lg:grid-cols-[1fr_421px]">
+      <div className="grid gap-10 px-12 pb-10 pt-6 lg:grid-cols-[1fr_421px]">
         <div className="min-w-0">
-          <p className="max-w-[720px] text-base leading-7 text-white/85">
+          <p className="max-w-[650px] text-base leading-relaxed text-white/85">
             {film.sinopsis}
           </p>
           {/* SLOT: RatingKomentar */}
@@ -113,7 +113,7 @@ async function IsiDetail({ params }) {
           <h2 className="font-judul text-2xl leading-8 text-white">
             Mirip dengan ini
           </h2>
-          <div className="mt-3 grid grid-cols-2 gap-2">
+          <div className="mt-3 grid grid-cols-2 gap-3">
             {mirip.map((m) => (
               <KartuFilm key={m.id_movie} film={m} penuh />
             ))}

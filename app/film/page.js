@@ -43,15 +43,15 @@ async function IsiFilm({ searchParams }) {
   });
 
   return (
-    <main className="px-11 pb-10 pt-8">
-      <h1 className="font-judul text-[32px] leading-10 text-white">
+    <main className="px-12 pb-10 pt-8">
+      <h1 className="font-judul text-[32px] leading-9 text-white">
         Semua film
       </h1>
-      <p className="text-base leading-6 text-white/60">
+      <p className="pt-1 text-base leading-6 text-white/60">
         {movies.length} film ditemukan
       </p>
 
-      <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-6">
+      <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-4 xl:grid-cols-6">
         {movies.map((film) => (
           <KartuFilm key={film.id_movie} film={film} denganInfo penuh />
         ))}
