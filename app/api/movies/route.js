@@ -2,10 +2,21 @@ import { prisma } from "../../../lib/prisma";
 import { cekAdmin } from "../../../lib/admin";
 import { validasiFilm } from "../../../lib/film";
 
-// Daftar semua film, yang terbaru di atas. Boleh diakses siapa saja.
-export async function GET() {
+// Daftar film, yang terbaru di atas. Boleh diakses siapa saja.
+// ?q=kata     : cari di judul (huruf besar/kecil tidak dibedakan)
+// ?genre=Aksi : hanya film dengan genre itu (persis)
+export async function GET(request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const q = (searchParams.get("q") || "").trim();
+    const genre = (searchParams.get("genre") || "").trim();
+
+    const where = {};
+    if (q) where.judul = { contains: q, mode: "insensitive" };
+    if (genre) where.genre = genre;
+
     const movies = await prisma.movie.findMany({
+      where,
       orderBy: { created_at: "desc" },
     });
     return Response.json({ movies });
